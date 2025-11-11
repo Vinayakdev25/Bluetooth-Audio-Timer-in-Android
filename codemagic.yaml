@@ -4,12 +4,13 @@ workflows:
     max_build_duration: 60
     environment:
       vars:
-        JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
+        JAVA_HOME: /opt/java/openjdk
         ANDROID_SDK_ROOT: /opt/android-sdk-linux
     scripts:
       - name: Set up JDK
         script: |
           export PATH="$JAVA_HOME/bin:$PATH"
+          echo "JAVA_HOME is set to $JAVA_HOME"
           java -version
       - name: Build with Gradle
         script: |
