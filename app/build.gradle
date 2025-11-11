@@ -38,6 +38,16 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    kapt {
+    arguments {
+        // Room schema export directory
+        arg("room.schemaLocation", "$projectDir/schemas".toString())
+        // Optional optimizations
+        arg("room.incremental", "true")
+        arg("room.expandProjection", "true")
+    }
+}
+
 
     // Lifecycle & Coroutines
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
