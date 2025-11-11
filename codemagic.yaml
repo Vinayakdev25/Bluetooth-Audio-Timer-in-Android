@@ -3,19 +3,18 @@ workflows:
     name: Build Android App
     max_build_duration: 60
     environment:
-      flutter: stable
       vars:
-        JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
+        JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
+      android:
+        api_level: 34
     scripts:
       - name: Set up JDK
         script: |
           export PATH="$JAVA_HOME/bin:$PATH"
           java -version
-      - name: Get Flutter dependencies
+      - name: Build with Gradle
         script: |
-          flutter pub get
-      - name: Build APK
-        script: |
-          flutter build apk --release
+          chmod +x gradlew
+          ./gradlew assembleRelease
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - app/build/outputs/**/*.apk
