@@ -3,16 +3,18 @@ workflows:
     name: Build Android Debug APK
     max_build_duration: 30
     environment:
-      sdk: "android-34"
-      java: "17"
+      vars:
+        JAVA_VERSION: 17
+        ANDROID_SDK_ROOT: /opt/android-sdk-linux
     scripts:
+      - name: Set up JDK
+        script: |
+          sdk install java 17.0.9-tem
+          sdk use java 17.0.9-tem
       - name: Clean project
         script: ./gradlew clean
       - name: Build Debug APK
         script: ./gradlew assembleDebug
     artifacts:
       - app/build/outputs/**/*.apk
-    publishing:
-      email:
-        recipients:
-          - vinayakmahadev729@gmail.com
+    
