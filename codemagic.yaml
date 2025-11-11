@@ -1,19 +1,18 @@
 workflows:
   android-workflow:
-    name: Build Android Debug APK
+    name: Build Android APK (no wrapper)
     max_build_duration: 60
     environment:
       vars:
         ANDROID_SDK_ROOT: /opt/android-sdk-linux
     scripts:
-      - name: Ensure gradlew executable
+      - name: Install Gradle if needed
         script: |
-          chmod +x ./gradlew
-      - name: Show java (quick check)
+          sudo apt-get update
+          sudo apt-get install -y gradle
+          gradle -v
+      - name: Build APK
         script: |
-          java -version || true
-      - name: Build Debug APK
-        script: |
-          ./gradlew assembleDebug
+          gradle assembleDebug
     artifacts:
       - app/build/outputs/**/*.apk
