@@ -5,8 +5,7 @@ workflows:
     environment:
       vars:
         JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
-      android:
-        api_level: 34
+        ANDROID_SDK_ROOT: /opt/android-sdk-linux
     scripts:
       - name: Set up JDK
         script: |
